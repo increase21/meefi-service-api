@@ -257,7 +257,7 @@ class api {
       let rLastName = helpers.getInputValueString(this.body, 'receiver_lastname')
       let amount = helpers.getInputValueString(this.body, 'amount')
       let desc = helpers.getInputValueString(this.body, 'description')
-      let country = helpers.getInputValueString(this.body, 'country')
+      let country = helpers.getInputValueString(this.body, 'country_code')
       let extID = helpers.getInputValueString(this.body, 'external_id')
       let appPlatform = helpers.getInputValueString(this.body, 'app_platform')
 
