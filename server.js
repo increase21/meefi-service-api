@@ -50,7 +50,7 @@ const httpServer = http.createServer(app)
 
 
 // Listening port
-const port = file.config.env === "live" ? 8080 : 9000;
+const port = file.config.env === "local" ? 9000 : 8080;
 httpServer.listen(port, (error) => {
    if (error) {
       console.log(error)

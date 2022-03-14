@@ -11,7 +11,14 @@ let cred = {
    live: {
       user: "rumeek1",
       password: "M24@Bn#ADb",
-      host: "https://host.meekfi.com/pa",
+      host: "host.meekfi.com",
+      database: "meeki_ussd_app",
+      encoding: 'utf8'
+   },
+   staging: {
+      user: "rumeek1",
+      password: "M24@Bn#ADb",
+      host: "host.meekfi.com",
       database: "meeki_ussd_app",
       encoding: 'utf8'
    }
@@ -19,9 +26,9 @@ let cred = {
 
 file.config = {}
 //the environment working on
-file.config.env = "live"
+file.config.env = "staging"
 
 // the database url to connect
-file.config.db = file.config.env === "live" ? cred.live : cred.local
+file.config.db = file.config.env === "live" ? cred.live : file.config.env === "staging" ? cred.staging : cred.local
 
 module.exports = file
