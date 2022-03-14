@@ -1,0 +1,16 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <ns2:BankToWalletResponse xmlns:ns2="http://mmwservice/">
+            <response>
+                <accountnumber>111111111</accountnumber>
+                <banktransactionreferenceid>116113276193</banktransactionreferenceid>
+                <message>SUCCESS</message>
+                <msisdn>22999248926</msisdn>
+                <status>0</status>
+                <timestamp>2021-01-22T16:00:23+00:00</timestamp>
+                <transamount>1485000</transamount>
+                <transid>420210122000188</transid>
+            </response>
+        </ns2:BankToWalletResponse>
+    </soap:Body>
+</soap:Envelope>

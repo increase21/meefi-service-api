@@ -1,0 +1,31 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mmw="http://mmwservice/">
+    <soapenv:Header/>
+     <soapenv:Body><mmw:BankToWallet>
+         <!--Optional:-->
+         <token>AtT4hgQyhQV2MFeymwxTNkUfQDelyyxdDFBQ/y7X2AE=</token>
+         <!--Optional:-->
+         <request>
+            <!--Optional:-->
+            <accountnumber>111111111</accountnumber>
+            <!--Optional:-->
+            <bankbalanceafter>0</bankbalanceafter>
+            <!--Optional:-->
+            <bankbalancebefore>9690000</bankbalancebefore>
+            <!--Optional:-->
+            <banktransactionreferenceid>116232267549</banktransactionreferenceid>
+            <!--Optional:-->
+            <firstname>NARCISSE</firstname>
+            <!--Optional:-->
+            <lastname>AHOKPE</lastname>
+            <!--Optional:-->
+            <msisdn>22999249277</msisdn>
+            <!--Optional:-->
+            <secondname></secondname>
+            <!--Optional:-->
+            <timestamp>2021-06-09T09:19:26+00:00</timestamp>
+            <!--Optionalfundwallet:-->
+            <transamount>9690000</transamount>
+         </request>
+      </mmw:BankToWallet>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:debitrequest xmlns:ns0="http://www.ericsson.com/em/emm/financial/v1_0">
+    <fromfri>fri:22990512029/msisdn</fromfri>
+    <tofri>fri:mosave.sp/USER</tofri>
+    <amount>
+        <amount>110</amount>
+        <currency>XOF</currency>
+    </amount>
+    <externaltransactionid>197901826</externaltransactionid>
+    <frommessage>MomoSave</frommessage>
+    <tomessage>MomoSav</tomessage>
+    <referenceid>197901826</referenceid>
+</ns0:debitrequest>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns0:sptransferrequest xmlns:ns0="http://www.ericsson.com/em/emm/serviceprovider/v1_0/backend">
+    <sendingfri>FRI:mosave.sp/USER</sendingfri>
+    <receivingfri>FRI:22990512029/MSISDN</receivingfri>
+    <amount>
+        <amount>10</amount>
+        <currency>XOF</currency>
+    </amount>
+    <providertransactionid>20119746</providertransactionid>
+    <name>
+        <firstname>Test</firstname>
+        <lastname>Momo</lastname>
+    </name>
+    <sendernote></sendernote>
+    <receivermessage>Received</receivermessage>
+    <referenceid>20119746</referenceid>
+</ns0:sptransferrequest>

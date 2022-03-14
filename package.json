@@ -1,0 +1,22 @@
+{
+   "name": "ussd-service-mtn-and-moove",
+   "version": "1.0.0",
+   "description": "",
+   "main": "server.js",
+   "dependencies": {
+      "bcrypt": "^5.0.1",
+      "fs": "^0.0.1-security",
+      "mysql": "^2.18.1",
+      "qs": "^6.10.1",
+      "qstring": "^0.0.9",
+      "request": "^2.88.2",
+      "validator": "^13.6.0",
+      "xml2js": "^0.4.23"
+   },
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node server.js"
+   },
+   "author": "Increase Nkanta",
+   "license": "ISC"
+}

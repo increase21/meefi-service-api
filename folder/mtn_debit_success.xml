@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:debitresponse xmlns:ns0="http://www.ericsson.com/em/emm/financial/v1_0">
+ <transactionid>31023</transactionid>
+ <status>PENDING</status>
+</ns0:debitresponse>

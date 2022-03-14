@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:getaccountholderpersonalinformationresponse xmlns:ns0="http://www.ericsson.com/em/emm/provisioning/v1_0">
+    <information>
+        <name>
+            <prefix>MIST</prefix>
+            <firstname>Test</firstname>
+            <surname>MFS Benin</surname>
+        </name>
+        <gender>MALE</gender>
+        <language>fr</language>
+        <birth>
+            <date>1990-03-30</date>
+            <country>BJ</country>
+            <province>Littoral</province>
+            <city>Cotonou</city>
+        </birth>
+        <occupation>
+            <profession>Tester</profession>
+            <employingcompany>MTN</employingcompany>
+        </occupation>
+        <residentialstatus/>
+    </information>
+</ns0:getaccountholderpersonalinformationresponse>

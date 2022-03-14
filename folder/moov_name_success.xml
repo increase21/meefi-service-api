@@ -1,0 +1,21 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <ns2:getMobileAccountStatusResponse xmlns:ns2="http://mmwservice/">
+            <response>
+                <accounttype>SUPD</accounttype>
+                <allowedtransfer>0</allowedtransfer>
+                <city>COTONOU</city>
+                <dateofbirth>1962-07-28 00:00:00.0</dateofbirth>
+                <firstname>NARCISSE</firstname>
+                <lastname>AHOKPE</lastname>
+                <message>SUCCESS</message>
+                <msisdn>22999249277</msisdn>
+                <region>LITTORAL</region>
+                <secondname></secondname>
+                <status>0</status>
+                <street></street>
+                <subscriberstatus>ACTIVE</subscriberstatus>
+            </response>
+        </ns2:getMobileAccountStatusResponse>
+    </soap:Body>
+</soap:Envelope>

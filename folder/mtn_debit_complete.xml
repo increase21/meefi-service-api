@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:debitcompletedrequest xmlns:ns0="http://www.ericsson.com/em/emm">
+    <transactionid>31023</transactionid>
+    <externaltransactionid>197901826</externaltransactionid>
+    <receiverinfo>
+    <fri>FRI:mosave.sp/USER</fri></receiverinfo>
+    <status>SUCCESSFUL</status>
+</ns0:debitcompletedrequest>
