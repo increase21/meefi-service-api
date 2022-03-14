@@ -18,7 +18,7 @@ let cred = {
    staging: {
       user: "rumeek1",
       password: "M24@Bn#ADb",
-      host: "34.233.248.114",
+      host: "10.10.6.77",
       database: "meeki_ussd_app",
       encoding: 'utf8'
    }
