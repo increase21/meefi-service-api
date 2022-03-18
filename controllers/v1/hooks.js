@@ -86,21 +86,26 @@ class hooks {
       }
 
       //load the credited financial configuration and run the credit
-      let getConfig = await helpers.getConfigSettings(getRecord.country_code, 'transfer_config').catch(e => ({ error: e }))
+      let getConfig = await dbFunctions.query(`SELECT * FROM transfer_config WHERE fin_id=${getRecord.destination_fin_id}`).catch(e => ({ error: e }))
+      // let getConfig = await helpers.getConfigSettings(getRecord.country_code, 'transfer_config').catch(e => ({ error: e }))
 
-      //if there's no data return
-      if (!getConfig || getConfig.status !== true) {
+      //check error
+      if (getConfig && getConfig.error) {
+         console.log("error fetching destination record", getConfig)
          return this._____replyMTNResponse()
       }
 
-      // console.log(getConfig)
+      if (!getConfig || getConfig.length === 0) {
+         console.log("error fetching destination record", getConfig)
+         return this._____replyMTNResponse()
+      }
 
-      //get the destination name configuration
-      let destData = getConfig.config_settings[getConfig.config_settings.findIndex(e => parseInt(e.fin_id) === parseInt(getRecord.destination_fin_id))]
+      // //get the destination name configuration
+      // let destData = getConfig.config_settings[getConfig.config_settings.findIndex(e => parseInt(e.fin_id) === parseInt(getRecord.destination_fin_id))]
 
       let destController;
       try {
-         destController = require('../../methods' + destData.route)
+         destController = require('../../methods' + getConfig.route)
       } catch (e) {
          console.log(e)
          return this._____replyMTNResponse()
@@ -118,7 +123,7 @@ class hooks {
       }
 
       //send the credit request to the destination controller/file
-      let runCredit = await destController[destData.method](this.req, this.res, sendData).catch(e => ({ error: e }))
+      let runCredit = await destController[getConfig.method](this.req, this.res, sendData).catch(e => ({ error: e }))
       //reply MTN
       return this._____replyMTNResponse()
 
