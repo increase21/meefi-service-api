@@ -284,7 +284,7 @@ helpers.getTransferCharge = (feeData, amount) => {
       //if the ammount is not found bcos the incoming value
       //is bigger than the settings, take the first bigger value
       if (!getValue || !getValue.charge_value) {
-         getValue = ranData[0]
+         getValue = ranData[ranData.length - 1]
       }
 
       // console.log(getValue)
