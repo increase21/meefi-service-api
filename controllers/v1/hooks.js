@@ -100,6 +100,8 @@ class hooks {
          return this._____replyMTNResponse()
       }
 
+      getConfig = getConfig[0]
+
       // //get the destination name configuration
       // let destData = getConfig.config_settings[getConfig.config_settings.findIndex(e => parseInt(e.fin_id) === parseInt(getRecord.destination_fin_id))]
 
