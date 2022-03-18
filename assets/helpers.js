@@ -260,6 +260,7 @@ helpers.getTransferCharge = (feeData, amount) => {
    let feeCurrency = ''
    let chargeValue = 0
    let chargeType = ''
+   amount = parseFloat(amount)
    //run the settings based on type
    if (feeData.charge_type === "fixed") {
       feeCharge = feeData.charge_value
@@ -277,13 +278,17 @@ helpers.getTransferCharge = (feeData, amount) => {
       //sort the data
       ranData.sort((a, b) => b.amount - a.amount)
       //get the fee assocaited with the amount
-      let getValue = ranData[ranData.findIndex(e => e.amount >= amount && amount <= e.amount)]
-
+      // console.log(ranData)
+      // console.log(ranData)
+      let getValue = ranData[ranData.findIndex(e => parseFloat(e.amount) >= amount && amount <= parseFloat(e.amount))]
       //if the ammount is not found bcos the incoming value
       //is bigger than the settings, take the first bigger value
       if (!getValue || !getValue.charge_value) {
          getValue = ranData[0]
       }
+
+      // console.log(getValue)
+
       //do the calculation based on the fee settings
       if (getValue.charge_type === "percent") {
          p = parseFloat(getValue.charge_value)

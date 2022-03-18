@@ -191,7 +191,7 @@ class api {
       let settingData = getSetin[0]
       let feeCharge = helpers.getTransferCharge(settingData.fee_data, amount)
 
-      console.log(settingData)
+      // console.log(settingData)
 
       return helpers.outputSuccess(this.res, { fee: feeCharge.fee, currency: feeCharge.currency })
    }
