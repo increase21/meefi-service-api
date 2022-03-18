@@ -278,9 +278,9 @@ helpers.getTransferCharge = (feeData, amount) => {
       //sort the data
       ranData.sort((a, b) => b.amount - a.amount)
       //get the fee assocaited with the amount
+      console.log(ranData)
       // console.log(ranData)
-      // console.log(ranData)
-      let getValue = ranData[ranData.findIndex(e => parseFloat(e.amount) >= amount && amount <= parseFloat(e.amount))]
+      let getValue = ranData[ranData.findIndex(e => amount >= parseFloat(e.amount))]
       //if the ammount is not found bcos the incoming value
       //is bigger than the settings, take the first bigger value
       if (!getValue || !getValue.charge_value) {

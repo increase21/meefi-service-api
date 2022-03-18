@@ -290,7 +290,7 @@ class api {
       }
 
       if (!country) {
-         return helpers.outputError(this.res, errorCode.missingField, "country is required")
+         return helpers.outputError(this.res, errorCode.missingField, "country_code is required")
       }
 
       if (!rFirstName) {
@@ -445,7 +445,7 @@ class api {
       //check error if there's 
       if (logReg && logReg.error) {
          //if it's a duplicate transaction
-         if (logReg.error.code = 'ER_DUP_ENTRY') {
+         if (logReg.error.code === 'ER_DUP_ENTRY') {
             return helpers.outputError(this.res, errorCode.duplicateRequest, "Duplicate transaction")
          }
          console.log(logReg.error)
