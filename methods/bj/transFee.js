@@ -27,12 +27,14 @@ pObj.runAllTypes = async (req, res, body, userData, settingData) => {
       let ranData = settingData.data
       //sort the data
       ranData.sort((a, b) => b.amount - a.amount)
+      console.log(ranData)
       //get the fee assocaited with the amount
       let getValue = ranData[ranData.findIndex(e => e.amount >= amount && amount <= e.amount)]
 
       //if the ammount is not found bcos the incoming value
       //is bigger than the settings, take the first bigger value
       if (!getValue || !getValue.charge_value) {
+         //get the highest
          getValue = ranData[0]
       }
       //do the calculation based on the fee settings
