@@ -86,7 +86,7 @@ router.use = async (req, res, urlPath) => {
    if (req.body) {
       //decrypt the payload
       try {
-         req.body = JWT.verify(req.body, checkUser.api_secret)
+         req.body = noJSON.indexOf(endpointParts[1]) > -1 ? req.body : JWT.verify(req.body, checkUser.api_secret)
       } catch (e) {
          console.log(e)
          return helpers.outputError(res, 400, "Invalid encryption")
