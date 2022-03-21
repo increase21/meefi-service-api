@@ -4,18 +4,10 @@ const file = require('../../assets/file');
 // Authorization Module
 const dbConnector = {};
 
+
 dbConnector.keepConnectionOpen = () => {
    // Create the database connection
    dbConnector.conn = mysql.createConnection(file.config.db);
-
-   //add connection listener
-   dbConnector.conn.connect((err) => {
-      if (err) {
-         console.log(err)
-      } else {
-         console.log('Database Connected At ' + new Date())
-      }
-   })
 
    // Handle error event that causes disconnection
    dbConnector.conn.on('error', em => {
@@ -25,9 +17,29 @@ dbConnector.keepConnectionOpen = () => {
       }, 1500);
    });
 
+   //for creating connection
+   dbConnector.conn.connect((err) => {
+      if (err) {
+         console.log(err)
+      } else {
+         console.log('Database Connected At ' + new Date())
+      }
+   })
+
+   // setInterval(() => {
+   //    dbConnector.conn.query('SELECT 1');
+   // }, 15000);
+
    // add the connection listener for error
    if (['disconnected', 'protocol_error'].indexOf(dbConnector.conn.state)) {
-      //send a mail that database is not connection
+      //add connection listener
+      dbConnector.conn.connect((err) => {
+         if (err) {
+            console.log(err)
+         } else {
+            console.log('Database Connected At ' + new Date())
+         }
+      })
    }
 };
 
@@ -35,5 +47,6 @@ dbConnector.keepConnectionOpen = () => {
 dbConnector.keepConnectionOpen();
 
 module.exports = {
-   conn: dbConnector.conn
+   conn: dbConnector.conn,
+   dbConnector
 };

@@ -14,17 +14,17 @@ class api {
    }
 
    async nameEnquiry() {
-      if (this.method !== "get") {
+      if (this.method !== "post") {
          return helpers.outputError(this.res, 405)
       }
 
-      let country = helpers.getInputValueString(this.req.query, "country_code")
-      let finAccount = helpers.getInputValueString(this.req.query, "fin_account")
-      let finCode = helpers.getInputValueString(this.req.query, "fin_code")
+      let country = helpers.getInputValueString(this.body, "country_code")
+      let finAccount = helpers.getInputValueString(this.body, "fin_account")
+      let finCode = helpers.getInputValueString(this.body, "fin_code")
 
       //check if there's country
       if (!country) {
-         return helpers.outputError(this.res, errorCode.missingField, "country is required")
+         return helpers.outputError(this.res, errorCode.missingField, "country_code is required")
       }
 
       //check if the number is not submitted
@@ -39,7 +39,7 @@ class api {
 
       //if the country code is more than 3 xters
       if (!helpers.isAlphabet(country) || country.length < 2 || country.length > 3) {
-         return helpers.outputError(this.res, errorCode.missingField, "country is invalid")
+         return helpers.outputError(this.res, errorCode.missingField, "country_code is invalid")
       }
 
       if (!helpers.isNumberic(finAccount) || finAccount.length < 10 || finAccount.length > 16) {
@@ -54,7 +54,7 @@ class api {
       }
 
       //get the partners from the configuration setting
-      let getSetinNameVal = await dbFunctions.query(`SELECT * FROM name_enq_config WHERE country_code='${country}' AND fin_id=${getPartner.data[0].id}`).catch(e => ({ error: e }))
+      let getSetinNameVal = await dbFunctions.query(`SELECT * FROM name_enq_config WHERE country_code=? AND fin_id=?`, [country, getPartner.data[0].id]).catch(e => ({ error: e }))
 
       //check for error
       if (getSetinNameVal && getSetinNameVal.error) {
@@ -73,7 +73,7 @@ class api {
       return await helpers.runConfigSettingData({
          req: this.req,
          res: this.res,
-         body: this.req.query,
+         body: this.body,
          userData: this.userData,
          getSetin: settingData,
          noFunctionNameError: "financial institution not available",
@@ -83,12 +83,12 @@ class api {
 
 
    async availablePartners() {
-      if (this.method !== "get") {
+      if (this.method !== "post") {
          return helpers.outputError(this.res, 405)
       }
 
-      let country = helpers.getInputValueString(this.req.query, "country_code")
-      let requestType = helpers.getInputValueString(this.req.query, "request_type")
+      let country = helpers.getInputValueString(this.body, "country_code")
+      let requestType = helpers.getInputValueString(this.body, "request_type")
 
       //check if there's country
       if (!country) {
@@ -129,12 +129,12 @@ class api {
 
    async transactionFee() {
       //check the method
-      if (this.method !== "get") {
+      if (this.method !== "post") {
          return helpers.outputError(this.res, 405)
       }
-      let amount = helpers.getInputValueString(this.req.query, 'amount')
-      let country = helpers.getInputValueString(this.req.query, 'country')
-      let finCode = helpers.getInputValueString(this.req.query, 'fin_code')
+      let amount = helpers.getInputValueString(this.body, 'amount')
+      let country = helpers.getInputValueString(this.body, 'country')
+      let finCode = helpers.getInputValueString(this.body, 'fin_code')
 
 
       if (!country) {
@@ -175,7 +175,7 @@ class api {
       let finData = getPartnersList.data[0]
 
       //get the partners from the configuration setting
-      let getSetin = await dbFunctions.query(`SELECT * FROM transfer_config WHERE country_code='${country}' AND fin_id=${finData.id}`).catch(e => ({ error: e }))
+      let getSetin = await dbFunctions.query(`SELECT * FROM transfer_config WHERE country_code=? AND fin_id=?`, [country, finData.id]).catch(e => ({ error: e }))
 
       //check for error
       if (getSetin && getSetin.error) {
@@ -185,7 +185,7 @@ class api {
 
       //if the response is not true
       if (!getSetin || getSetin.length === 0) {
-         return helpers.outputError(this.res, errorCode.notFound, finCode + " not available at the moment")
+         return helpers.outputError(this.res, errorCode.notFound, finData.name + " not available at the moment")
       }
 
       let settingData = getSetin[0]
@@ -370,12 +370,12 @@ class api {
 
       //if they are not settings for transfers
       if (!originConfigData || originConfigData.length === 0) {
-         return helpers.outputError(this.res, null, originFin + " not available at the moment")
+         return helpers.outputError(this.res, null, originFinData.name + " not available at the moment")
       }
 
       //if they are not settings for transfers
       if (!dstConfigData || dstConfigData.length === 0) {
-         return helpers.outputError(this.res, null, destFin + " not available at the moment")
+         return helpers.outputError(this.res, null, destFinData.name + " not available at the moment")
       }
 
       //remove the data from array
@@ -385,12 +385,12 @@ class api {
 
       //if the origin does not accept transfer
       if (originConfigData.accept_debit !== 1) {
-         return helpers.outputError(this.res, null, originFin + " not available for this request")
+         return helpers.outputError(this.res, null, originFinData.name + " not available for this request")
       }
 
       //if the origin does not accept transfer
       if (dstConfigData.accept_credit !== 1) {
-         return helpers.outputError(this.res, null, destFin + " not available for this request")
+         return helpers.outputError(this.res, null, destFinData.name + " not available for this request")
       }
 
       let originController;
@@ -404,7 +404,7 @@ class api {
 
       //if the method name does not exist
       if (typeof originController[originConfigData.method] !== "function") {
-         return helpers.outputError(this.res, null, "Oops! " + originFin + " not available for this request")
+         return helpers.outputError(this.res, null, "Oops! " + originFinData.name + " not available for this request")
       }
 
 
@@ -418,7 +418,7 @@ class api {
 
       //if the method name does not exist
       if (typeof destController[dstConfigData.method] !== "function") {
-         return helpers.outputError(this.res, null, "Oops! " + destFin + " not available for this request")
+         return helpers.outputError(this.res, null, "Oops! " + destFinData.name + " not available for this request")
       }
 
       let dn = new Date()

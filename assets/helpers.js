@@ -315,6 +315,13 @@ helpers.errorText = {
 
 helpers.telcoAvailable = ["mtn", "moov"]
 
+
+//function to take a sleep
+helpers.takeASleep = (timer) => {
+   // console.log("Taking a sleep for " + timer / 1000 + " secs")
+   return new Promise((resolve, reject) => setTimeout(() => resolve(), timer));
+}
+
 helpers.outputSuccess = (response, data) => {
    response.json({ status: "success", code: "CS200", data })
 }

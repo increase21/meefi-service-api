@@ -2,6 +2,7 @@ const helpers = require('./assets/helpers')
 const fs = require('fs')
 const noAuthResource = ['users', 'hooks']
 const noJSON = ['hooks']
+const JWT = require("jsonwebtoken")
 const dbFunctions = require('./model/v1.1/dbFunctions')
 const router = {}
 
@@ -81,17 +82,22 @@ router.use = async (req, res, urlPath) => {
 
    let body = ''
    //parse the payload if it's a post request and
-   if (requestMethod !== 'get' && req.body) {
+   // console.log(req.body)
+   if (req.body) {
+      //decrypt the payload
+      try {
+         req.body = JWT.verify(req.body, checkUser.api_secret)
+      } catch (e) {
+         console.log(e)
+         return helpers.outputError(res, 400, "Invalid encryption")
+      }
+
       //if the request if a no JSON request
-      if (noJSON.indexOf(endpointParts[1]) > -1) {
-         body = req.body
-      } else {
-         //if the request is JSON
-         try {
-            body = typeof req.body === 'object' ? req.body : JSON.parse(req.body)
-         } catch (e) {
-            return helpers.outputError(res, 400);
-         }
+      try {
+         body = noJSON.indexOf(endpointParts[1]) > -1 ? req.body :
+            typeof req.body === 'object' ? req.body : JSON.parse(req.body)
+      } catch (e) {
+         return helpers.outputError(res, 400);
       }
    }
 

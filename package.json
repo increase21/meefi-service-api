@@ -6,6 +6,7 @@
    "dependencies": {
       "bcrypt": "^5.0.1",
       "fs": "^0.0.1-security",
+      "jsonwebtoken": "^8.5.1",
       "mysql": "^2.18.1",
       "qs": "^6.10.1",
       "qstring": "^0.0.9",

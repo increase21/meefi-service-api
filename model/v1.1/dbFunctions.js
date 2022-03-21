@@ -1,9 +1,10 @@
-const { conn } = require('./dbConnector');
+const { conn, dbConnector } = require('./dbConnector');
 
 const dbFunctions = {}
 
 //function to get the user public key
 dbFunctions.getAPIKey = (apiKey) => {
+   //go added to query
    return new Promise(resolve => {
       conn.query(`SELECT * FROM merchants WHERE api_key='${apiKey}' LIMIT 1`,
          (error, res) => resolve(error ? { error: error } : res))
@@ -12,9 +13,9 @@ dbFunctions.getAPIKey = (apiKey) => {
 }
 
 //function to get the user public key
-dbFunctions.query = (qStatement) => {
+dbFunctions.query = (qStatement, ...rest) => {
    return new Promise(resolve => {
-      conn.query(qStatement, (error, res) => resolve(error ? { error: error } : res))
+      conn.query(qStatement, ...rest, (error, res) => resolve(error ? { error: error } : res))
    }).catch(e => ({ error: e }))
       .finally(e => ({ error: e }))
 }
