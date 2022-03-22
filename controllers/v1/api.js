@@ -133,7 +133,7 @@ class api {
          return helpers.outputError(this.res, 405)
       }
       let amount = helpers.getInputValueString(this.body, 'amount')
-      let country = helpers.getInputValueString(this.body, 'country')
+      let country = helpers.getInputValueString(this.body, 'country_code')
       let finCode = helpers.getInputValueString(this.body, 'fin_code')
 
 
