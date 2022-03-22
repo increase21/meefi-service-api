@@ -26,9 +26,10 @@ dbConnector.keepConnectionOpen = () => {
       }
    })
 
-   // setInterval(() => {
-   //    dbConnector.conn.query('SELECT 1');
-   // }, 15000);
+   //keep pinging to keep the connection alive
+   setInterval(() => {
+      dbConnector.conn.query('SELECT 1');
+   }, 15000);
 
    // add the connection listener for error
    if (['disconnected', 'protocol_error'].indexOf(dbConnector.conn.state)) {
