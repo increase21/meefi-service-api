@@ -331,7 +331,7 @@ class api {
       //check error
       if (getData.status !== true) {
          console.log(getData.error)
-         helpers.outputError(this.res, getData.code, getData.msg)
+         return helpers.outputError(this.res, getData.code, getData.msg)
       }
 
       //get data out from the array
@@ -454,7 +454,7 @@ class api {
 
       //check if the query failds
       if (!logReg || logReg.affectedRows === 0) {
-         return helpers.outputError(res, errorCode.couldNotProcess, "Oops! something went wrong")
+         return helpers.outputError(this.res, errorCode.couldNotProcess, "Oops! something went wrong")
       }
 
       this.body._origin_data = originConfigData

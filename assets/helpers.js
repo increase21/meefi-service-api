@@ -2,6 +2,7 @@ const helpers = {}
 const request = require('request')
 const dbFunctions = require('../model/v1.1/dbFunctions')
 const errorCode = require('./error_code')
+// const merchantRequest
 
 // for generating token
 const randomToken = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-'
@@ -70,7 +71,7 @@ helpers.makeHTTRequest = (data = { url: '', method: '', headers: {}, body: {} })
    })
 }
 
-
+//function to output error responses with http error code
 helpers.outputError = (response, code, message) => {
    //if there's an http code
    if (/^\d+$/.test(code)) {
@@ -136,6 +137,11 @@ helpers.outputError = (response, code, message) => {
          }
    }
    response.json(outputObj)
+}
+
+//function to output success response
+helpers.outputSuccess = (response, data) => {
+   response.json({ status: "success", code: "CS200", data })
 }
 
 //function to get available partners by country
@@ -322,7 +328,4 @@ helpers.takeASleep = (timer) => {
    return new Promise((resolve, reject) => setTimeout(() => resolve(), timer));
 }
 
-helpers.outputSuccess = (response, data) => {
-   response.json({ status: "success", code: "CS200", data })
-}
 module.exports = helpers;
